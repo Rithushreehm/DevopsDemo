@@ -1,17 +1,23 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven1'
+    }
+
     stages {
 
         stage('Build') {
             steps {
-                bat 'mvn clean compile'
+                dir('myapp') {
+                    bat 'mvn clean install'
+                }
             }
         }
 
-        stage('Test') {
+        stage('Archive') {
             steps {
-                bat 'mvn test'
+                archiveArtifacts artifacts: 'myapp/target/*.jar'
             }
         }
 
