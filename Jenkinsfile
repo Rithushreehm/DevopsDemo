@@ -1,30 +1,31 @@
-Jenkins filepipeline {
+pipeline {
     agent any
+
+    tools {
+        maven 'Maven1'
+    }
 
     stages {
 
         stage('Build') {
             steps {
-                bat 'mvn clean compile'
+                dir('myapp') {
+                    bat 'mvn clean install'
+                }
             }
         }
 
-        stage('Test') {
+        stage('Archive') {
             steps {
-                bat 'mvn test'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                bat 'mvn package'
+                archiveArtifacts artifacts: 'myapp/target/*.jar'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Application Deployed Successfully'
+                echo 'Deploying using Ansible'
             }
         }
+
     }
 }
