@@ -15,9 +15,9 @@ pipeline {
             }
         }
 
-        stage('Package') {
+        stage('Deploy') {
             steps {
-                bat 'mvn package'
+                echo 'Deploying using Ansible'
             }
         }
 
