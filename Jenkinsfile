@@ -1,4 +1,7 @@
-stages {
+Jenkins filepipeline {
+    agent any
+
+    stages {
 
         stage('Build') {
             steps {
