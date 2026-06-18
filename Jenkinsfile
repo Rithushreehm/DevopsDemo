@@ -21,11 +21,5 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-            bat 'wsl ansible-playbook -i lab8/inventory.ini lab8/deploy.yml'
-        }
-    }
-
     }
 }
