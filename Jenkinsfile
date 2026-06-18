@@ -1,31 +1,27 @@
-pipeline {
-    agent any
-
-    tools {
-        maven 'Maven1'
-    }
-
-    stages {
+stages {
 
         stage('Build') {
             steps {
-                dir('myapp') {
-                    bat 'mvn clean install'
-                }
+                bat 'mvn clean compile'
             }
         }
 
-        stage('Archive') {
+        stage('Test') {
             steps {
-                archiveArtifacts artifacts: 'myapp/target/*.jar'
+                bat 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                bat 'mvn package'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying using Ansible'
+                echo 'Application Deployed Successfully'
             }
         }
-
     }
 }
