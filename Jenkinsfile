@@ -23,7 +23,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Application Deployed Successfully'
+                bat 'ansible-playbook -i lab8/inventory.ini lab8/deploy.yml'
             }
         }
     }
